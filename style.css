@@ -1,72 +1,126 @@
-body {
-  background: linear-gradient(120deg, #ffb6c1, #ffe4e1);
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  color: #333;
-  padding: 40px;
-  overflow-x: hidden;
+/* --- basic layout --- */
+:root{
+  --bg1: #fff7fb;
+  --accent: #ff6fb5;
+  --accent2: #ffd166;
+  --card: #fff;
+  --text: #333;
+  --shadow: 0 8px 30px rgba(17,24,39,0.08);
 }
 
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  max-width: 600px;
-  margin: auto;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg,#fff7fb 0%, #fffef2 100%);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
 }
 
-h1, h2 {
-  color: #8b008b;
-  margin-bottom: 10px;
+/* container */
+.container{width:100%;max-width:900px;position:relative}
+
+/* hero */
+.hero{text-align:center;margin-bottom:12px}
+.glow{
+  font-size:44px;
+  margin:6px 0;
+  color:var(--accent);
+  text-shadow:
+    0 0 6px rgba(255,111,181,0.6),
+    0 0 12px rgba(255,111,181,0.15);
+  animation: shimmer 3s linear infinite;
+  letter-spacing:1px;
+}
+@keyframes shimmer {
+  0%{filter:brightness(1)}
+  50%{filter:brightness(1.15)}
+  100%{filter:brightness(1)}
+}
+.sub{color:#6b6b6b;margin:0}
+
+/* stickers floating */
+.stickers{position:fixed;inset:0;pointer-events:none;z-index:1}
+.sticker{
+  position:absolute;font-size:34px;opacity:0.95;
+  transform-origin:center;
+  animation: floaty 6s ease-in-out infinite;
+}
+.s1{left:6%;top:10%;animation-delay:0s}
+.s2{left:82%;top:12%;animation-delay:1s}
+.s3{left:28%;top:30%;animation-delay:2s}
+.s4{left:72%;top:40%;animation-delay:3s}
+.s5{left:50%;top:6%;animation-delay:4s}
+@keyframes floaty {
+  0%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-22px) rotate(8deg)}
+  100%{transform:translateY(0) rotate(0)}
 }
 
-/* Bounce Animation */
-.bounce {
-  animation: bounce 1s infinite;
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-20px); }
-  60% { transform: translateY(-10px); }
-}
-
-button {
-  background: #ff69b4;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
+/* card area */
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  position:relative;
+  z-index:2;
 }
 
-button:hover {
-  background: #ff1493;
+/* envelope */
+.envelope-wrap{display:flex;align-items:center;justify-content:center;gap:20px;flex-direction:column}
+.envelope{
+  width:230px;height:145px;position:relative;cursor:pointer;perspective:800px;
 }
-
-.hidden {
-  display: none;
+.envelope .flap{
+  width:100%;height:0;position:absolute;left:0;top:0;
+  border-left:115px solid transparent;border-right:115px solid transparent;
+  border-bottom:62px solid var(--accent);
+  border-radius:8px 8px 0 0;transform-origin:top center;transition:transform .6s ease;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06);
 }
-
-#letter {
-  margin-top: 20px;
-  line-height: 1.8;
-  text-align: left;
-  position: relative;
+.envelope.open .flap{transform:rotateX(180deg) translateY(-24px)}
+.envelope .body{
+  position:absolute;left:0;top:62px;width:100%;height:78px;
+  background:linear-gradient(180deg,#fff,#fff8fb);border-radius:0 0 10px 10px;
+  display:flex;align-items:center;justify-content:center;
 }
+.seal{font-size:22px;transform:translateY(-6px)}
 
-/* Confetti */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-  animation: fall 3s linear infinite;
+.letter{width:420px;max-width:92%;border-radius:12px;padding:18px;margin-top:18px;background:linear-gradient(180deg,#fff,#fffaf2);box-shadow:0 12px 30px rgba(0,0,0,0.06);text-align:left}
+.hidden{display:none}
+.letter h2{color:var(--accent);margin-top:0}
+.sign{margin-top:10px;font-weight:600}
+
+/* big stickers in letter */
+.sticker-row{display:flex;gap:10px;margin-top:12px}
+.big{font-size:34px;transform:translateY(0);animation:pop 1s ease}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* buttons */
+.btn{
+  background:#fff;border:2px solid #f4e6ef;padding:9px 14px;border-radius:10px;cursor:pointer;font-weight:700;
 }
+.btn:hover{transform:translateY(-2px)}
+.letter-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
 
-@keyframes fall {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(400px) rotate(360deg); }
+/* footer */
+.foot{text-align:center;color:#8b6b7a;margin-top:16px;font-size:14px}
+
+/* confetti pieces */
+.confetti{
+  position:fixed;z-index:9999;pointer-events:none;border-radius:3px;
+  animation: fall linear forwards;
+}
+@keyframes fall{to{transform:translateY(140vh) rotate(600deg);opacity:1}}
+
+/* responsive */
+@media (max-width:520px){
+  .glow{font-size:32px}
+  .envelope{width:190px;height:120px}
+  .letter{width:320px}
 }
