@@ -1,35 +1,47 @@
 function openLetter() {
-  const env = document.getElementById('envelope');
-  const letter = document.getElementById('letter');
-  if (!env.classList.contains('open')) {
-    env.classList.add('open');
-    setTimeout(() => {
-      letter.classList.remove('hidden');
-      letter.scrollIntoView({ behavior: 'smooth' });
-    }, 700);
-  }
+  document.getElementById("envelope").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
+  confettiBurst();
 }
 
 function closeLetter() {
-  document.getElementById('envelope').classList.remove('open');
-  document.getElementById('letter').classList.add('hidden');
+  document.getElementById("letter").classList.add("hidden");
+  document.getElementById("envelope").classList.remove("hidden");
 }
 
+// Confetti effect 🎉
 function confettiBurst() {
-  const colors = ['#ff85b5','#ffbde6','#ffd1dc','#fff07a','#f6a5c0'];
-  for (let i = 0; i < 40; i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti';
-    el.style.position = 'fixed';
-    el.style.left = (Math.random() * 100) + '%';
-    el.style.top = '-10px';
-    el.style.width = (6 + Math.random() * 10) + 'px';
-    el.style.height = (6 + Math.random() * 10) + 'px';
-    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.borderRadius = '4px';
-    el.style.opacity = 0.9;
-    el.style.animation = `fall ${1 + Math.random() * 2}s linear forwards`;
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 3000);
+  const colors = ["#ff69b4", "#ffb6c1", "#ffd1dc", "#fff0f5", "#ffc0cb"];
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 5000);
   }
 }
+
+// Confetti style dynamically
+const style = document.createElement('style');
+style.textContent = `
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear forwards;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+`;
+document.head.appendChild(style);
