@@ -112,9 +112,9 @@ body {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
-  padding: 25px;
-  width: 330px;
-  max-height: 500px;
+  padding: 30px;
+  width: 350px;
+  max-height: 550px;
   overflow-y: auto;
   margin-top: 15px;
   animation: fadeIn 1s ease forwards;
@@ -127,14 +127,14 @@ body {
 h2 {
   color: #ff64b0;
   font-family: 'Great Vibes', cursive;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem; /* том болгосон */
+  margin-bottom: 12px;
 }
 
 #letterText {
   color: #444;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  line-height: 1.8; /* уншихад амархан */
+  font-size: 1.1rem; /* арай том болгосон */
   text-align: left;
 }
 
@@ -156,7 +156,7 @@ h2 {
   border-radius: 20px;
   padding: 8px 16px;
   margin: 8px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: 0.3s;
 }
